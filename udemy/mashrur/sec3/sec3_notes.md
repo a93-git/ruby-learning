@@ -43,7 +43,8 @@ be there
 - Root routes name is **root**
 
 ### Adding a route to the routes.rb file
-*route_name* "controller#action"
+- root route -> *route_name* "controller#action"
+- other routes -> *http_method* *route_name* *"controller#action"*
 
 - The controllers are present in the *app_root_folder*/controllers/ folder 
 - Controller names end with \_controller.rb but it is not mentioned in the 
@@ -54,7 +55,10 @@ routes.rb file - it is taken for granted by rails
 invoked when user visits a particular page or performs a specific action
 
 ## Controllers
-- They are classes that are sub-classes of ActionController::Base class
+- They are classes with actions defined in them
+- The default controller named "application" inherits from "ActionController::Base" 
+class and all the rest of the controllers inherit the "application" controller
+- The default controller provides some out of the box functionalities
 - When a user visits a page (or route) it redirects the request to a controller
 that has methods to handle the request
 
@@ -71,6 +75,33 @@ that has methods to handle the request
 ### Setting up an action in controller
 - Creating an empty function in the controller file will make rails to look 
 for a corresponding template in the views folder
+- The expected name will be *controller_name*.html.erb
 - The name of the views template will be the same as the name of the controller 
 without the \_controller part
+
+## Structure of a Rails application
+- The 'app' folder
+├── app
+│   ├── assets - contains the static files - images, app-wide css, config
+│   ├── channels - real time communication, application cable
+│   ├── controllers - houses the default application and all other controllers
+│   ├── helpers - helper methods to help with views (exclusively)	
+│   ├── javascript - contains all the js files, bundled using webpack
+│   ├── jobs
+│   ├── mailers
+│   ├── models - contains all the models, default model -> application 
+│   └── views - contains all the views template
+
+- The 'config' folder - It contains all the configuration files - credentials, 
+API keys, routes, development and production environment configuration etc.
+- The 'db' folder - contains the testing and development sqlite3 database tables, 
+schemas and migration files
+- The 'Gemfile' file - we can add/remove gems here
+- The 'Gemfile.lock' file - It is like pip freeze output but for gems
+- The 'package.json' file - contains the node packages added using yarn
+
+## Git discourse
+### Add remote origin to a repo on local machine and push the files to remote
+`git remote add origin git@github.com:someuser/somename.git`
+`git push -u origin main`
 
