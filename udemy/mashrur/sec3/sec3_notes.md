@@ -7,7 +7,6 @@ the business logic layer (what happens in the backend)
 ### Model
 - Any resource in the web app - users, blog posts, videos etc.
 - Most commonly these are accompanied with a persistence layer (e.g. database)
-- Models communicates with the database tables
 
 ### View
 - The visible layer - what the user sees in their app
@@ -105,3 +104,13 @@ schemas and migration files
 `git remote add origin git@github.com:someuser/somename.git`
 `git push -u origin main`
 
+## Models
+- Models communicate with the database tables - it is what connects our app 
+with the database
+- Rails uses an ORM (Object Relational Mapper) that translates the ruby code 
+into something that the database can understand. We are making queries from 
+the Rails app using ruby code.
+- This ORM is called 'ActiveRecord'
+- There is a default 'Application' model provided with Rails that inherits 
+the ActiveRecord::Base class
+- All other models inherit the 'Application' model
