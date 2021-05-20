@@ -43,11 +43,13 @@ be there
 - Root routes name is **root**
 
 ### Adding a route to the routes.rb file
-*route_name* "controller\_name#method\_name"
+*route_name* "controller#action"
 
 - The controllers are present in the *app_root_folder*/controllers/ folder 
 - Controller names end with \_controller.rb but it is not mentioned in the 
 routes.rb file - it is taken for granted by rails
+- If we have a controller named "application", the corresponding class name
+ will be "ApplicationController"
 - Adding a route means specifying which method of which controller will be 
 invoked when user visits a particular page or performs a specific action
 
@@ -55,4 +57,20 @@ invoked when user visits a particular page or performs a specific action
 - They are classes that are sub-classes of ActionController::Base class
 - When a user visits a page (or route) it redirects the request to a controller
 that has methods to handle the request
+
+### Generating controllers
+- To create a new controller and the corresponding views folder with the given 
+ name:
+`rails generate controller name`
+- It will also create a few other helper and assets resources
+- The corresponding controller will be "name\_controller.rb" with the skeleton
+ class
+- The corresponding template will be created in app/views/*name* 
+- The controller will be created in app/controllers/*name*\_controller.rb
+
+### Setting up an action in controller
+- Creating an empty function in the controller file will make rails to look 
+for a corresponding template in the views folder
+- The name of the views template will be the same as the name of the controller 
+without the \_controller part
 
