@@ -196,8 +196,11 @@ before yield
   <%= msg %>
 <% end %>
 
-
-
+## REST
+- Rails *resources* provide REST-ful routes to rails resources
+- REST - REpresentational State Transfer
+- REST maps HTTP verbs (POST, GET, PUT/PATCH, DELETE) to CRUD actions in Rails
+ (create/save, show/index, edit/update, destroy)
 
 
 
