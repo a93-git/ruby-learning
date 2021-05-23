@@ -112,11 +112,89 @@ individual actions defined in the controller
 - The name of the class in the controller is in *CamelCase* and inherits from the 
 ApplicationController base class
 
+## Forms
+### Form helper
+- *form_with* helper submits the form using ajax but it can be configured to 
+submit the form via HTTP method as well
+- We need to provide the model we are working with using the *scope* parameter 
+as a symbol. Then we need to provide the *url* or the location where the form 
+will be submitted. This will serve as the action attribute for the form element
+- To specify that we want to use HTTP method instead of AJAX we need to 
+provide the `local: true` attribute as well 
+- The `|f|` in the syntax below is the local variable name for the form
+- The url is appended with `_path` which is Rails' way of specifying urls
+- Syntax
+`<%= form_with scope: :article, url: articles_path, local: true  do |f| %>`
+`	<p>`
+`	<%= f.label: :title, "Title" %><br>`
+`	<%= f.text_field: :title %>`
+`	</p>`
+`	<p>`
+`	<%= f.label: :description, "Description" %><br>`
+`	<%= f.text_area: :description%>`
+`	</p>`
+`	<%= f.save %>`
+`<% end %>`
 
+### Corresponding controller actions
+- There are total 7 controller actions:
+  - index
+  - show
+  - new
+  - edit
+  - create
+  - update
+  - destroy 
+- We define the model variables as class variables ie. starting with *@*
+- These variables then can be accessed in the corresponding view template 
+- In the *create* action, we need to use the following pattern to handle any 
+errors:
+```
+if @article.save
+  do something
+else
+  do something else
+end
+```
+- Here the *@article.save* action saves the data in the *@article* variable to 
+the corresponding database table
+- If there are any errors while saving the item the check will fail and then 
+the else clause will come in effect
+- To access the error messages, we can check if there are any messages first 
+and then display the messages accordingly in our view. Add the following to the
+ view template:
+```
+<% if @article.errors.any? %>
+<ul>
+<% @article.errors.full_messages.each do |message| %>
+<li><%= message %></li>
+<% end %>
+</ul>
+<% end %>
+```
 
+### Permitted parameters
+- In any of the controllers where params are required, use:
+```
+@article = Article.new(params.require(:article).permit(:title, :description))
+```
+- *:article* in the params.require is the name of the parameter hash
+- *:title, :description* in the .permit() block are the hash symbols we are 
+looking for in the *:article* hash
 
-
-
+### Flash messages
+- To display notifications (e.g. article was saved successfully) we can use 
+flash messages
+- flash messages can hold 2 types of values: :notice, :alert
+```
+flash[:notice] = "Article saved successfully"
+```
+- It should be put in the *application* view page in the views/layouts dir 
+before yield
+```
+<% flash.each do |name, msg| %>
+  <%= msg %>
+<% end %>
 
 
 
