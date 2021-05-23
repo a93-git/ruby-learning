@@ -202,10 +202,38 @@ before yield
 - REST maps HTTP verbs (POST, GET, PUT/PATCH, DELETE) to CRUD actions in Rails
  (create/save, show/index, edit/update, destroy)
 
+## Hyperlink
+- Use the following pattern to set the hyperlinks
+```
+<%= link_to "Text to show", article_path(@article) %>
+```
+- Here *Text to show* is the text that will be displayed as link
+- *article_path* is the route that we want to goto
+- *@article* is the params that are required by that route
 
+## Refactoring
+- We can move the common code to private methods in the controller and then 
+call these methods in the *before_action* in the controller
+```
+private
 
-
-
+def get\_params
+  params.require(:article).permit(:title, :description)
+end
+```
+```
+before_action :get_params, only: [:show, :update, :edit]
+```
+### Partials
+- Extract the html code (including the embedded ruby code) into antoher file 
+known as a partial
+- The partial filename must start with an *\_* and have an extension .html.erb
+- While including we don't need to provide the "\_" or the extension
+```
+<%= render "partialname" %>
+```
+- When using partials with the *application* view, we need to provide relative 
+path
 
 
 
