@@ -314,6 +314,14 @@ as the argument an applying the method `max_by` and *price* is the index to sort
 **class methods** - Methods that are defined within and called directly upon the
  class object rather than the objects instantiated from the class object
 
+**Syntaxt** for class methods:
+```
+class T
+  def T.a(value) # Here a is the class method
+    puts value
+  end
+end
+```
 The `new` method is present as both instance and class method for the class `Class`
 
 `File.open` returns a `File` object, so it is an initializer in a sense
